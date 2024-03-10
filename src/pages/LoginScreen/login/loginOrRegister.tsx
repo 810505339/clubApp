@@ -1,27 +1,28 @@
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
-import { ImageBackground, View } from 'react-native';
-import { Button, Checkbox, Text, useTheme } from 'react-native-paper';
+import { View } from 'react-native';
+import { Button, Checkbox, Text } from 'react-native-paper';
 import { TextInput } from 'react-native-paper';
-import { ScreenNavigationProp } from '@router/type';
+import { RootStackParamList } from '@router/type';
 import BaseLayout from '@components/baselayout';
 import Toast from 'react-native-toast-message';
-import { loginApi, sendYzmApi } from '@api/login';
+import { sendYzmApi } from '@api/login';
 import { useRequest } from 'ahooks';
+import { cssInterop } from 'nativewind';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 const bgImage = require('@assets/imgs/login/login-register-bg.png');
 
 
+const TextInputStyle = cssInterop(TextInput, {
+  className: {
+    target: "style",
+  },
+});
+
 const LoginOrRegister = () => {
-
-
   const [phone, setPhone] = useState('');
   const [checked, setChecked] = useState(false);
-  const navigation = useNavigation<
-    | ScreenNavigationProp<'NewUser'>
-    | ScreenNavigationProp<'OldUser'>
-    | ScreenNavigationProp<'Verification'>
-  >();
-
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { loading, runAsync } = useRequest(() => sendYzmApi(phone), {
     manual: true,
   });
@@ -77,6 +78,8 @@ const LoginOrRegister = () => {
     return true;
   }
 
+
+
   return (
     <BaseLayout source={bgImage} loading={loading}>
       <View className="mx-5 mt-11">
@@ -86,12 +89,12 @@ const LoginOrRegister = () => {
         <View className="flex-row items-center mt-4 w-full">
           <Text className="font-bold text-4xl ml-2">0065</Text>
           <Text className="font-bold text-4xl ml-2 mr-1">-</Text>
-          <TextInput
+          <TextInputStyle
             keyboardType="numeric"
             maxLength={11}
             value={phone}
             onChangeText={text => setPhone(text)}
-            className="bg-transparent flex-grow font-bold text-2xl "
+            className="bg-transparent flex-grow font-bold text-2xl"
           />
         </View>
         <View className="flex-row items-start justify-start  mt-6 relative">

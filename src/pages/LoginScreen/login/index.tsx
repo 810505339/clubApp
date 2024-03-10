@@ -1,14 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
 import { View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
-import { ScreenNavigationProp } from '@router/type';
+import { RootStackParamList } from '@router/type';
 import BaseLayout from '@components/baselayout';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const bgImage = require('@assets/imgs/login/bg.png');
 
 
 const Login = () => {
-  const navigation = useNavigation<ScreenNavigationProp<'LoginOrRegister'>>();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   function handleLogin() {
     navigation.navigate('LoginOrRegister');
@@ -29,7 +30,7 @@ const Login = () => {
           登录 / 注册
         </Button>
         <View className='flex-row items-center justify-center'>
-          <View className="m-auto border  mt-16 w-[50%] flex-row items-center justify-between">
+          <View className="m-auto border  mt-8 w-[50%] flex-row items-center justify-between">
             <View className="w-8 h-0 border-t border-[#ffffff7f]  " />
             <Text className="text-xs text-[#ffffff7f]">
               三方账号登录
