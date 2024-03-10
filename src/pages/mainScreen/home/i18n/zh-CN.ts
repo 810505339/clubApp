@@ -1,0 +1,67 @@
+export default {
+  home: {
+    nav1: '拼酒局',
+    nav2: '预定门票',
+    nav3: '预定卡座',
+    nav4: '发广播',
+    nav5: '消费排行',
+    nav6: '0.2 动态',
+  },
+  dynamic: {
+    tabs: {
+      text1: '全部',
+    },
+    tagList: {
+      tag1: '# 需报名',
+      tag2: '# 免费',
+      tag3: '# 收费',
+    },
+    info: {
+      tag1: '活动时间',
+      tag2: '活动地点',
+      tag3: '活动费用',
+      tag4: '费用用途',
+      tag5: '报名人数',
+      btn1: '立即报名',
+      btn2: '人数已满,期待下次相遇',
+      btn3: '',
+      text1: '您正在报名参加活动 是否继续?',
+    },
+  },
+  preset: {
+    label1: '剩余',
+    label2: '张门票',
+    label3: '总计：',
+  },
+  reserveBooth: {
+    label1: '最晚到场时间',
+    label2: '到店人数',
+  },
+  confirmBooth: {
+    label1: '选择卡座',
+    label2: '选择套餐',
+    label3: '到店自选',
+    label4: '到店后自选酒水餐品',
+    label5: '该卡座最大可容纳',
+    label6: '人',
+    label7: '最低消费',
+    label8: '卡座预订成功后，将会赠送您相同人数的门票',
+  },
+  orders: {
+    label1: '所选门店',
+    label2: '卡座位置',
+    label3: '已选套餐',
+    label4: '入场时间',
+    label5: '到店人数',
+    label6: '最晚到场时间',
+    label7: '应付金额',
+    label8: '商品名称',
+    label9: '商品数量',
+    label10: '酒局名称',
+    label11: '是否自动锁定',
+    label12: '男士人数',
+    label13: '女士人数',
+    label14: '酒局模式',
+
+  },
+};
