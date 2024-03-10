@@ -77,8 +77,6 @@ const ListHeader = ({ balancePress }: IListHeader) => {
               blurType="dark"
               blurAmount={5}
               reducedTransparencyFallbackColor="transparent"
-
-
             />
             <Image source={sexIcon} className="w-4 h-4 absolute left-2" />
             <Text className="text-xs pl-8 pr-2 text-white opacity-50">{sexText}</Text>

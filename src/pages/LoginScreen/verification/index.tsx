@@ -93,7 +93,7 @@ const Verification = () => {
   return (
     <BaseLayout source={bgImage} loading={loading}>
       <View className="mx-5 mt-11">
-        <Text className="text-[#FFFFFF]">请输入验证码</Text>
+        <TextStlye className="text-[#FFFFFF] font-300">请输入验证码</TextStlye>
         <View className="mt-4">
           <View>
             <VerificationCodeField onChange={codeChange} />
