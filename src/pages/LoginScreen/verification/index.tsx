@@ -1,23 +1,26 @@
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
-import { RootStackParamList, ScreenNavigationProp } from '@router/type';
+import { RootStackParamList } from '@router/type';
 import BaseLayout from '@components/baselayout';
 import { useCountdown } from '@hooks/useCountdown';
 import { useCallback, useEffect, useState } from 'react';
 import VerificationCodeField from './component/VerificationCodeField';
 import { loginApi, sendYzmApi } from '@api/login';
 import { useRequest } from 'ahooks';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { cssInterop } from 'nativewind';
 
+const TextStlye = cssInterop(Text, {
+  className: {
+    target: 'style'
+  }
+})
 
 const bgImage = require('@assets/imgs/login/login-register-bg.png');
-
 const Verification = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'Verification'>>();
-  const navigation = useNavigation<
-    | ScreenNavigationProp<'AuthenticationSex'>
-    | ScreenNavigationProp<'OldUser'>
-  >();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const mobile = route.params.phone;
   const [isResend, setIsResend] = useState(false);
   const { count, start, stop } = useCountdown(60);
@@ -73,29 +76,29 @@ const Verification = () => {
   }, [count, stop]);
 
   const ResendRender = (
-    <Text className="text-center text-[#ffffff7f]">
+    <TextStlye>
       没收到验证码？
-      <Text className="text-white font-semibold" onPress={sendVerification}>
+      <TextStlye className="text-white" style={{ fontWeight: 'bold' }} onPress={sendVerification}>
         重新发送
-      </Text>
-    </Text>
+      </TextStlye>
+    </TextStlye>
   );
 
   const CountdownRender = (
-    <Text className="text-center text-[#ffffff7f] font-semibold" >
-      <Text className="text-[#EE2737]">{count}秒</Text>后重试
-    </Text>
+    <TextStlye className=' font-bold'>
+      <Text className="text-[#EE2737] font-bold">{count}秒</Text>后重试
+    </TextStlye>
   );
 
   return (
     <BaseLayout source={bgImage} loading={loading}>
       <View className="mx-5 mt-11">
-        <Text className="text-[#ffffff7f]">请输入验证码</Text>
+        <Text className="text-[#FFFFFF]">请输入验证码</Text>
         <View className="mt-4">
           <View>
             <VerificationCodeField onChange={codeChange} />
           </View>
-          <View className="mt-6">
+          <View className="mt-6 flex-row items-center justify-center text-center">
             {isResend ? CountdownRender : ResendRender}
           </View>
         </View>

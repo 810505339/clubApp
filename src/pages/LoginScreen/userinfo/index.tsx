@@ -15,9 +15,15 @@ import { RootStackParamList } from '@router/type';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useRequest } from 'ahooks';
 import { detailsById } from '@api/user';
+import { cssInterop } from 'nativewind';
 
 const bgImage = require('@assets/imgs/login/login-register-bg.png');
 
+const IconButtonStyle = cssInterop(IconButton, {
+  className: {
+    target: 'style'
+  }
+})
 
 const UserInfo = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -158,7 +164,7 @@ const UserInfo = () => {
 
 
 
-  const imgRender = (<IconButton
+  const imgRender = (<IconButtonStyle
     icon="plus-thick"
     iconColor={'#ffffff'}
     size={24}
