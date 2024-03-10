@@ -6,6 +6,8 @@ import { Text } from 'react-native-paper';
 import Loading from './loading';
 const defaultBg = require('@assets/imgs/base/default-bg.png');
 
+
+
 type IProps = {
   source?: ImageSourcePropType | boolean,
   className?: string

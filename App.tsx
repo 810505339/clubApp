@@ -12,6 +12,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
 import toastConfig from '@components/toast/customToast';
 import { getFileUrl } from '@store/getfileurl';
+import "./global.css"
 
 const App = () => {
 
