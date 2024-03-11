@@ -18,7 +18,9 @@ const App = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
   const toUrl = () => {
     /* */
-    navigation.navigate('UserInfo')
+    navigation.navigate('Verification', {
+      phone: '123'
+    })
   }
   return (
     <BaseLayout>
