@@ -9,12 +9,10 @@ import VerificationCodeField from './component/VerificationCodeField';
 import { loginApi, sendYzmApi } from '@api/login';
 import { useRequest } from 'ahooks';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { cssInterop } from 'nativewind';
+import {  remapProps } from 'nativewind';
 
-const TextStlye = cssInterop(Text, {
-  className: {
-    target: 'style'
-  }
+remapProps(Text, {
+  clssName: 'style'
 })
 
 const bgImage = require('@assets/imgs/login/login-register-bg.png');
@@ -76,24 +74,24 @@ const Verification = () => {
   }, [count, stop]);
 
   const ResendRender = (
-    <TextStlye>
+    <Text>
       没收到验证码？
-      <TextStlye className="text-white" style={{ fontWeight: 'bold' }} onPress={sendVerification}>
+      <Text className="text-white" style={{ fontWeight: 'bold' }} onPress={sendVerification}>
         重新发送
-      </TextStlye>
-    </TextStlye>
+      </Text>
+    </Text>
   );
 
   const CountdownRender = (
-    <TextStlye className=' font-bold'>
+    <Text className=' font-bold'>
       <Text className="text-[#EE2737] font-bold">{count}秒</Text>后重试
-    </TextStlye>
+    </Text>
   );
 
   return (
     <BaseLayout source={bgImage} loading={loading}>
       <View className="mx-5 mt-11">
-        <TextStlye className="text-[#FFFFFF] font-300">请输入验证码</TextStlye>
+        <Text className="text-[#FFFFFF] font-300">请输入验证码</Text>
         <View className="mt-4">
           <View>
             <VerificationCodeField onChange={codeChange} />
