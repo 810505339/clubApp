@@ -13,7 +13,11 @@ import { detailsById, mineInfo } from '@api/user';
 import CustomModal from '@components/custom-modal';
 import useLanguageSelect from './hooks/useLanguageSelect';
 import { useImmer } from 'use-immer';
+import { cssInterop } from 'nativewind'
 
+cssInterop(Appbar.Header, {
+  className: 'style'
+})
 
 const bg1Icon = require('@assets/imgs/user/bg_1.png');
 const bg2Icon = require('@assets/imgs/user/bg_2.png');
@@ -87,7 +91,7 @@ const ListHeader = ({ balancePress }: IListHeader) => {
         </View>
       </View>
     </View>
-    <View className="flex flex-row  gap-3  border-[#ffffff7f] pb-4 px-5">
+    <View className="flex flex-row  gap-5  border-[#ffffff7f] pb-4 px-5">
       <TouchableOpacity className={`${box}  flex-grow`} onPress={() => balancePress('Information')} >
         <ImageBackground source={bg1Icon} className="absolute right-0 bottom-0 left-0 w-full h-full" />
         <Text className="text-[#E6A055FF]  text-2xl">{info?.balanceAmount}</Text>
