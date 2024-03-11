@@ -64,6 +64,8 @@ const Verification = () => {
       navigation.navigate('HomeTabs');
     } catch (err) {
 
+      console.log(err)
+
     }
   };
 
@@ -83,7 +85,7 @@ const Verification = () => {
   );
 
   const CountdownRender = (
-    <Text className=' font-bold'>
+    <Text className='font-bold'>
       <Text className="text-[#EE2737] font-bold">{count}秒</Text>后重试
     </Text>
   );
@@ -116,6 +118,7 @@ const Verification = () => {
         </Button>
       </View>
     </BaseLayout>
+
   );
 };
 
