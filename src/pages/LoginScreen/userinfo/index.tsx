@@ -19,11 +19,11 @@ import { cssInterop } from 'nativewind';
 
 const bgImage = require('@assets/imgs/login/login-register-bg.png');
 
-const IconButtonStyle = cssInterop(IconButton, {
-  className: {
-    target: 'style'
-  }
-})
+// cssInterop(IconButton, {
+//   className: {
+//     target: 'style'
+//   }
+// })
 
 const UserInfo = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -164,7 +164,7 @@ const UserInfo = () => {
 
 
 
-  const imgRender = (<IconButtonStyle
+  const imgRender = (<IconButton
     icon="plus-thick"
     iconColor={'#ffffff'}
     size={24}

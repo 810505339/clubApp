@@ -2,7 +2,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppNavigator from '@router/index';
 import '@utils/i18next';
 import { PaperProvider, MD3DarkTheme, MD3LightTheme, Modal, Portal } from 'react-native-paper';
-import { useColorScheme } from 'react-native';
+import { Text, useColorScheme } from 'react-native';
 import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
 import SplashScreen from 'react-native-splash-screen';
 import { useEffect } from 'react';
@@ -47,5 +47,7 @@ const App = () => {
     </GestureHandlerRootView>
   );
 };
+
+
 
 export default App;

@@ -13,11 +13,11 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 const bgImage = require('@assets/imgs/login/login-register-bg.png');
 
 
-const TextInputStyle = cssInterop(TextInput, {
-  className: {
-    target: "style",
-  },
-});
+// cssInterop(TextInput, {
+//   className: {
+//     target: "style",
+//   },
+// });
 
 const LoginOrRegister = () => {
   const [phone, setPhone] = useState('');
@@ -89,7 +89,7 @@ const LoginOrRegister = () => {
         <View className="flex-row items-center mt-4 w-full">
           <Text className="font-bold text-4xl ml-2">0065</Text>
           <Text className="font-bold text-4xl ml-2 mr-1">-</Text>
-          <TextInputStyle
+          <TextInput
             keyboardType="numeric"
             maxLength={11}
             value={phone}
