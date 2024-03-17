@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useState } from 'react';
+import { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ImageBackground, View, type ImageSourcePropType } from 'react-native';
 import { StatusBar, NativeModules, Platform } from 'react-native';
@@ -24,12 +24,10 @@ const RendernoMoreData = () => {
 
 const BaseLayout: FC<PropsWithChildren<IProps>> = ({ source = defaultBg, className = '', children, showAppBar = true, showNoMore = false, loading = false }) => {
 
-  const [statusBarHeight, setStatusBarHeight] = useState(0)
-  if (Platform.OS === 'android') {
-    const height = 56 + StatusBar.currentHeight!
-    setStatusBarHeight(height)
-  }
+  const [statusBarHeight, setStatusBarHeight] = useState<number>(StatusBar.currentHeight! + 56)
 
+
+  
   if (Platform.OS === 'ios') {
     const { StatusBarManager } = NativeModules;
     StatusBarManager.getHeight(statusBarHeight => {

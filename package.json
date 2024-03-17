@@ -10,7 +10,8 @@
     "test": "jest",
     "a-clean": "cd android &&./gradlew clean",
     "a-build": "cd android && ./gradlew assembleRelease",
-    "i-pod-install": "cd ios && pod install"
+    "i-pod-install": "cd ios && pod install",
+    "i-build": "react-native bundle --platform ios --entry-file index.js --bundle-output ./bundles/main.jsbundle --assets-dest  ./bundles --dev false"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.6.0",
