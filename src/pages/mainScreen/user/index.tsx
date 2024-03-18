@@ -13,11 +13,11 @@ import { detailsById, mineInfo } from '@api/user';
 import CustomModal from '@components/custom-modal';
 import useLanguageSelect from './hooks/useLanguageSelect';
 import { useImmer } from 'use-immer';
-// import { cssInterop } from 'nativewind'
+import { cssInterop } from 'nativewind'
 
-// cssInterop(Appbar.Header, {
-//   className: 'style'
-// })
+cssInterop(Appbar.Header, {
+  className: 'style'
+})
 
 const bg1Icon = require('@assets/imgs/user/bg_1.png');
 const bg2Icon = require('@assets/imgs/user/bg_2.png');

@@ -13,11 +13,11 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 const bgImage = require('@assets/imgs/login/login-register-bg.png');
 
 
-// cssInterop(TextInput, {
-//   className: {
-//     target: "style",
-//   },
-// });
+cssInterop(TextInput, {
+  className: {
+    target: "style",
+  },
+});
 
 const LoginOrRegister = () => {
   const [phone, setPhone] = useState('');
