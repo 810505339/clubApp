@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import { Button } from 'react-native-paper';
 import PswInput from './components/pswInput';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '@router/type';
 import { useRequest } from 'ahooks';
 import { loginApi } from '@api/login';
 import { useImmer } from 'use-immer';
 import Toast from 'react-native-toast-message';
+import useLogin from '../hooks/useLogin';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 const bgImage = require('@assets/imgs/login/login-register-bg.png');
 
 const OldUser = () => {
@@ -17,13 +19,9 @@ const OldUser = () => {
   });
   const route = useRoute<RouteProp<RootStackParamList, 'OldUser'>>();
   const { phone } = route.params;
-  const { runAsync, loading } = useRequest(() => loginApi({
-    username: phone,
-    password: allData.password,
-    grant_type: 'password',
-  }), {
-    manual: true,
-  });
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+
+  const { handleLogin, loading } = useLogin({ username: phone, password: allData.password, grant_type: 'password' }, navigation)
 
   function onChangeText(pwd: string) {
     setAllData(draft => {
@@ -31,15 +29,18 @@ const OldUser = () => {
     });
   }
 
-  async function handleLogin() {
+  async function test() {
     if (!allData.password) {
       Toast.show({
         text1: '请输入密码',
       });
       return;
     }
-    //todo
-    await runAsync();
+  }
+
+  const pwdLogin = async () => {
+    test();
+    handleLogin()
   }
 
   return (
@@ -56,7 +57,7 @@ const OldUser = () => {
             borderRadius: 33,
           }}
           labelStyle={{ fontSize: 18, color: '#FFFFFF', fontWeight: '600' }}
-          contentStyle={{ height: 50 }} onPress={handleLogin}>
+          contentStyle={{ height: 50 }} onPress={pwdLogin}>
           登录
         </Button>
       </View>

@@ -14,6 +14,10 @@ import useMode from './hooks/useMode';
 import { useEffect } from 'react';
 import CustomNavigationBar from '@components/appBar/customNavigationBar';
 import { HeaderButtonProps } from '@react-navigation/native-stack/lib/typescript/src/types';
+import { cssInterop } from 'nativewind'
+cssInterop(Button, {
+  className: 'style'
+})
 
 const bg1 = require('@assets/imgs/fightwine/bg1.png');
 const bg2 = require('@assets/imgs/fightwine/bg2.png');

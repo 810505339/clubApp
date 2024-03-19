@@ -6,10 +6,11 @@ import BaseLayout from '@components/baselayout';
 import { useCountdown } from '@hooks/useCountdown';
 import { useCallback, useEffect, useState } from 'react';
 import VerificationCodeField from './component/VerificationCodeField';
-import { loginApi, sendYzmApi } from '@api/login';
+import { sendYzmApi } from '@api/login';
 import { useRequest } from 'ahooks';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import {  remapProps } from 'nativewind';
+import { remapProps } from 'nativewind';
+import useLogin from '../hooks/useLogin';
 
 remapProps(Text, {
   clssName: 'style'
@@ -19,12 +20,13 @@ const bgImage = require('@assets/imgs/login/login-register-bg.png');
 const Verification = () => {
   const route = useRoute<RouteProp<RootStackParamList, 'Verification'>>();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+
   const mobile = route.params.phone;
   const [isResend, setIsResend] = useState(false);
   const { count, start, stop } = useCountdown(60);
   const [code, setCode] = useState('');
-
-  const { runAsync, loading } = useRequest(() => sendYzmApi(mobile), {
+  const { handleLogin, loading } = useLogin({ code, mobile }, navigation)
+  const { runAsync } = useRequest(() => sendYzmApi(mobile), {
     manual: true,
   });
 
@@ -41,33 +43,6 @@ const Verification = () => {
     setCode(value);
   }, []);
 
-  const handleLogin = async () => {
-    try {
-
-      const data = await loginApi({ code, mobile });
-      console.log(data, 'handleLogin');
-      console.log(data.setPersonalInfo);
-
-
-      //没有人脸去人脸识别
-      if (!data?.user_info?.checkFace) {
-        navigation.navigate('AuthenticationSex');
-        return;
-      }
-
-      //设置信息
-      if (!data?.user_info?.setPersonalInfo) {
-        navigation.navigate('UserInfo');
-        return;
-      }
-
-      navigation.navigate('HomeTabs');
-    } catch (err) {
-
-      console.log(err)
-
-    }
-  };
 
   useEffect(() => {
     if (count == 0) {

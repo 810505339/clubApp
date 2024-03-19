@@ -110,7 +110,7 @@ const OrdersInfo = () => {
       const className = orderStatus === undefined ? 'px-4 py-2' : 'flex-row justify-around items-center';
       return <View className={`${className} mt-2 h-14`}>
         <Divider className="absolute top-0 left-0 right-0" />
-        {orderStatus === undefined && <Button mode={'elevated'} className="bg-[#EE2737FF]" textColor="#0C0C0CFF" onPress={() => submit(route.params?.couponId)}>提交订单</Button>}
+        {orderStatus === undefined && <Button  className="bg-[#EE2737FF]" textColor="#0C0C0CFF" onPress={() => submit(route.params?.couponId)}>提交订单</Button>}
         {orderStatus != undefined && (<>
           <Button mode={'elevated'} textColor="#ffffff" onPress={() => setAllData(draft => { draft.visible = true; })}>取消订单</Button>
           <Button mode={'elevated'} className="bg-[#EE2737FF]" textColor="#0C0C0CFF">继续支付</Button>

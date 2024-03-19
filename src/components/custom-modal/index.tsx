@@ -4,7 +4,13 @@ import { StyleSheet, View } from 'react-native';
 import { BottomSheetFooter, BottomSheetModal, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import { Button, RadioButton, Text } from 'react-native-paper';
 import FastImage from 'react-native-fast-image';
+import { cssInterop } from 'nativewind'
+
+cssInterop(FastImage, {
+  className: 'style'
+})
 const headerIcon = require('@assets/imgs/base/header.png');
+
 
 export type IItemProp = {
   name: string,
