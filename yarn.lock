@@ -6851,6 +6851,11 @@ react-native-circular-progress-indicator@^4.4.2:
   dependencies:
     react-native-redash "*"
 
+react-native-compressor@^1.8.24:
+  version "1.8.24"
+  resolved "https://registry.yarnpkg.com/react-native-compressor/-/react-native-compressor-1.8.24.tgz#3cc481ad6dfe2787ec4385275dd24791f04d9e71"
+  integrity sha512-PdwOBdnyBnpOag1FRX9ks4cb0GiMLKFU9HSaFTHdb/uw6fVIrnCHpELASeliOxlabWb5rOyVPbc58QpGIfZQIQ==
+
 react-native-confirmation-code-field@^7.3.2:
   version "7.3.2"
   resolved "https://registry.yarnpkg.com/react-native-confirmation-code-field/-/react-native-confirmation-code-field-7.3.2.tgz#f0ee9e72f632aa2ae4dade4a1664a7a484885ea8"

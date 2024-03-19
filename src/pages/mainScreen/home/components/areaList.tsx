@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { View, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, TouchableOpacity, ImageBackground, useWindowDimensions, FlatList } from 'react-native';
 import { Text } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
 import { useImmer } from 'use-immer';
@@ -17,6 +17,11 @@ type IProps = {
 }
 
 
+const Item = ({ title }) => (
+  <TouchableOpacity style={styles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </TouchableOpacity >
+);
 const AreaItem = (props: IProps) => {
   const { onPress, index, activeIndex, name, businessDateVOS, pictureFIleVOs } = props;
   const beginTime = businessDateVOS[0].beginTime;
@@ -41,11 +46,15 @@ export type IAreaListProps = {
 }
 const AreaList: FC<IAreaListProps> = (props) => {
   const { storeId, date, onChange } = props;
+
+  const { width } = useWindowDimensions()
   const [data, setData] = useImmer({
     cells: [],
     activeIndex: 0,
   });
   const onPress = (index: number) => {
+    console.log(index, 'index');
+
     setData(draft => {
       draft.activeIndex = index;
     });
@@ -63,7 +72,7 @@ const AreaList: FC<IAreaListProps> = (props) => {
     setData(draft => {
       const list = res ?? [];
       draft.cells = list;
-        draft.activeIndex = 0;
+      draft.activeIndex = 0;
       onChange(list, 0);
     });
 
@@ -75,10 +84,28 @@ const AreaList: FC<IAreaListProps> = (props) => {
     if (storeId && date) {
       getAreaByIdApi();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [storeId, date]);
 
-  return <Animated.FlatList horizontal showsHorizontalScrollIndicator={false} data={data.cells} keyExtractor={item => item.id} renderItem={({ index, item }) => <AreaItem {...item} index={index} activeIndex={data.activeIndex} onPress={onPress} />} />;
+  // return <FlatList
+
+  //   horizontal
+
+  //   data={data.cells}
+  //   keyExtractor={item => item.id}
+  //   renderItem={({ index, item }) =>
+  //     <AreaItem {...(item as IProps)}
+  //       index={index}
+  //       activeIndex={data.activeIndex}
+  //       onPress={onPress} />}
+  // />;
+
+  return <FlatList
+    horizontal
+    data={DATA}
+    renderItem={({ item }) => <Item title={item.title} />}
+    keyExtractor={item => item.id}
+  />
 
 };
 
