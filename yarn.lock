@@ -4043,6 +4043,11 @@ event-target-shim@^5.0.0, event-target-shim@^5.0.1:
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
 
+events@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/events/-/events-3.3.0.tgz#31a95ad0a924e2d2c419a813aeb2c4e878ea7400"
+  integrity sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==
+
 execa@^5.0.0, execa@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/execa/-/execa-5.1.1.tgz#f80ad9cbf4298f7bd1d4c9555c21e93741c411dd"
@@ -7108,6 +7113,13 @@ react-native-vision-camera@^3.9.0:
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/react-native-vision-camera/-/react-native-vision-camera-3.9.1.tgz#78eb9da9fcd1cf2ee2562ec18ab8966e0215ab1b"
   integrity sha512-Pi9ikguJlN1ydVZOyRaMfUij1raUY93rVuPM92BsGnXEfxSLbvRYXW4ll1DRtVtjS0kZq4IW7Oavg8syRPc/xQ==
+
+react-native-wechat-lib@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-wechat-lib/-/react-native-wechat-lib-3.0.4.tgz#a1c943b0932423f2554d201299e50906da1f32cc"
+  integrity sha512-tJYSsT8kk0uEdtskIwPUfUdmiBw+kPRNJBXR8fc5SaHZNJCE1ewrzD7sge9KK+RaldvWNmiTb4tbw0l2V+Jv1w==
+  dependencies:
+    events "^3.3.0"
 
 react-native@*, react-native@0.73.5:
   version "0.73.5"

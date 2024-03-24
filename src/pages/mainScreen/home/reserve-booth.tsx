@@ -80,24 +80,28 @@ const ReserveBooth = () => {
 
         <ScrollView>
           <Panel className="mt-44">
+            {/* 选择门店 */}
             <View className="">
               <Text className="text-xs text-white font-semibold opacity-50">{t('common.label1')}</Text>
               <TextInput mode="outlined" className="flex-auto bg-transparent mt-4" value={shopName} showSoftInputOnFocus={false} outlineStyle={{ borderRadius: 16 }} right={<TextInput.Icon icon="chevron-down" />} onPressIn={showShop} />
             </View>
+            {/* 选择时间 */}
             <View className="mt-7">
               <Text className="text-xs text-white font-semibold opacity-50">{t('common.label2')}</Text>
               <TextInput mode="outlined" className="flex-auto bg-transparent mt-4" showSoftInputOnFocus={false} value={formatDay} outlineStyle={{ borderRadius: 16 }} onPressIn={() => { setShowTime(true); }} right={<TextInput.Icon icon="calendar" />} />
               {showTime && <DateTimePicker onChange={onChange} value={time} minimumDate={new Date()} />}
             </View>
+            {/* 最晚到场时间 */}
             <View className="mt-7">
               <Text className="text-xs text-white font-semibold opacity-50">{t('reserveBooth.label1')}</Text>
               <TextInput mode="outlined" className="flex-auto bg-transparent mt-4" showSoftInputOnFocus={false} value={formatTimer} outlineStyle={{ borderRadius: 16 }} onPressIn={() => { setShowTime1(true); }} right={<TextInput.Icon icon="timer" />} />
               {showTime1 && <DateTimePicker mode="time" is24Hour onChange={checkTime} value={time1} />}
             </View>
+            {/* 到店人数 */}
             <View className="mt-7 flex-row items-center justify-between">
-              <Text className="text-xs text-white font-semibold opacity-50">{t('reserveBooth.label1')}</Text>
+              <Text className="text-xs text-white font-semibold opacity-50">{t('reserveBooth.label2')}</Text>
               <View className="flex-row items-center">
-                <NumberInput min={1} num={data.num} onChange={changeSum} />
+                <NumberInput min={1} num={data.num} max={100} onChange={changeSum} />
               </View>
             </View>
             <View className="mt-7">

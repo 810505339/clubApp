@@ -1,11 +1,17 @@
 import { FC, useEffect } from 'react';
-import { View, TouchableOpacity, ImageBackground, useWindowDimensions, FlatList } from 'react-native';
+import { View, TouchableOpacity, ImageBackground, useWindowDimensions, FlatList, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
 import { useImmer } from 'use-immer';
 import { getAreaById } from '@api/store';
 import dayjs from 'dayjs';
 import { fileStore } from '@store/getfileurl';
+const DATA = [
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'First Item',
+  },
+];
 
 type IProps = {
   onPress: (index: number) => void
@@ -13,15 +19,12 @@ type IProps = {
   activeIndex: number,
   name: string,
   businessDateVOS: any[],
-  pictureFIleVOs: any[]
+  pictureFIleVOs: any[],
+  id: string
 }
 
 
-const Item = ({ title }) => (
-  <TouchableOpacity style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </TouchableOpacity >
-);
+
 const AreaItem = (props: IProps) => {
   const { onPress, index, activeIndex, name, businessDateVOS, pictureFIleVOs } = props;
   const beginTime = businessDateVOS[0].beginTime;
@@ -87,27 +90,31 @@ const AreaList: FC<IAreaListProps> = (props) => {
 
   }, [storeId, date]);
 
-  // return <FlatList
-
-  //   horizontal
-
-  //   data={data.cells}
-  //   keyExtractor={item => item.id}
-  //   renderItem={({ index, item }) =>
-  //     <AreaItem {...(item as IProps)}
-  //       index={index}
-  //       activeIndex={data.activeIndex}
-  //       onPress={onPress} />}
-  // />;
+  if (data.cells.length <= 3) {
+    return <View className='flex flex-row'>
+      {(data.cells as Array<IProps>).map((item, index) => {
+        return <AreaItem {...item} key={item.id} activeIndex={data.activeIndex}
+          onPress={onPress} index={index} />
+      })}
+    </View>
+  }
 
   return <FlatList
+
     horizontal
-    data={DATA}
-    renderItem={({ item }) => <Item title={item.title} />}
+
+    data={data.cells}
     keyExtractor={item => item.id}
-  />
+    renderItem={({ index, item }) =>
+      <AreaItem {...(item as IProps)}
+        index={index}
+        activeIndex={data.activeIndex}
+        onPress={onPress} />}
+  />;
+
 
 };
+
 
 export default AreaList;
 

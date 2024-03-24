@@ -4,8 +4,8 @@ import BaseLayout from '@components/baselayout';
 import { useRequest } from 'ahooks';
 import { selectableMode } from '@api/fightwine';
 import { ImageBackground, TouchableOpacity, View, Image, ImageSourcePropType } from 'react-native';
-import { Text } from 'react-native-paper';
-import { useState } from 'react';
+import { Button, Text } from 'react-native-paper';
+import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@router/type';
@@ -45,6 +45,13 @@ const Item = (props: Item & { onPress: (winePartyMode: string, modeName: string)
 const Launch = () => {
 
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (<Button></Button>)
+    })
+
+  }, [navigation])
   //这里业务接口
   const list: Item[] = [
     { sub: '参与者中女性付费，男性免费', bg: bg1, color: '#79ABFFFF', winePartyMode: 'FEMALE_AA' },

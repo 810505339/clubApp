@@ -167,7 +167,7 @@ const Preset = () => {
           <View className="mt-7">
             <Text className="text-xs text-white font-semibold opacity-50">{t('common.label2')}</Text>
             <TextInput mode="outlined" className="flex-auto bg-transparent mt-4" showSoftInputOnFocus={false} value={formatDay} outlineStyle={{ borderRadius: 16 }} onPressIn={() => { setShowTime(true); }} right={<TextInput.Icon icon="calendar" />} />
-            {showTime && <DateTimePicker onChange={onChange} value={time} />}
+            {showTime && <DateTimePicker onChange={onChange} value={time} mode="datetime" minimumDate={new Date()} />}
           </View>
           <View className="mt-7">
             <Text className="text-xs text-white font-semibold opacity-50 mb-4">{t('common.label3')}</Text>
