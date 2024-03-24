@@ -1,5 +1,5 @@
 import BaseLayout from '@components/baselayout';
-import { Image, ImageBackground, View } from 'react-native';
+import { Image, ImageBackground, TouchableOpacity, View } from 'react-native';
 import { Text, TextInput, IconButton, Divider, Button } from 'react-native-paper';
 import { useImmer } from 'use-immer';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -24,6 +24,7 @@ import { ticketBooking } from '@api/ticket';
 /* 预定门票 */
 const tickerBg = require('@assets/imgs/home/preset/ticket-header.png');
 const card_1 = require('@assets/imgs/base/card_1.png');
+const icon = require('@assets/imgs/home/preset/icon.png');
 
 const defaultData = {
   remainingNum: 0, //剩余票数
@@ -45,6 +46,9 @@ const Preset = () => {
     setShowTime } = useSelectTimer();
 
   const navgation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+
+
   const { t } = useTranslation();
 
   const { run, refresh, loading } = useRequest(onSaleNum, {
@@ -118,6 +122,10 @@ const Preset = () => {
 
     });
   };
+  /* 规则弹窗 */
+  const toRuleUrl = () => {
+    navgation.navigate('PresetRule');
+  }
 
 
 
@@ -148,6 +156,18 @@ const Preset = () => {
     time,
     data.selectAreaId,
   ]);
+
+
+  useEffect(() => {
+    navgation.setOptions({
+      headerRight: () => <TouchableOpacity>
+        <View className="border-[#EE2737] border py-1 px-2 rounded-3xl text-[#EE2737] flex-row items-center">
+          <Image source={icon} className="w-6 h-6 mr-1" />
+          <Text style={{ color: '#EE2737' }}>预定规则</Text>
+        </View>
+      </TouchableOpacity>
+    })
+  }, [navgation])
 
 
 
