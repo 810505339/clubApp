@@ -15,6 +15,8 @@ import useLanguageSelect from './hooks/useLanguageSelect';
 import { useImmer } from 'use-immer';
 import { cssInterop } from 'nativewind'
 
+
+
 cssInterop(Appbar.Header, {
   className: 'style'
 })
@@ -35,13 +37,32 @@ const languageIcon = require('@assets/imgs/user/language.png');
 
 type IListHeader = {
   balancePress: (name: string) => void
+  navigation: NativeStackNavigationProp<UsertackParamList>
 }
-const ListHeader = ({ balancePress }: IListHeader) => {
-  const { data } = useRequest(mineInfo);
-  const { data: _userInfo } = useRequest(detailsById);
+const ListHeader = ({ balancePress, navigation }: IListHeader) => {
+  const { data, run: userRun } = useRequest(mineInfo, {
+    manual: true,
+
+  });
+  const { data: _userInfo, run } = useRequest(detailsById, {
+    manual: true,
+
+  });
   /* 用户信息 */
   const userInfo = _userInfo?.data;
   const info = data?.data;
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      // The screen is focused
+      // Call any action
+      run()
+      userRun()
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation])
 
 
   const fontText = 'text-xs text-[#ffffff7f]';
@@ -166,7 +187,7 @@ const HomeScreen = () => {
     <CheckAuthLayout />
     <Animated.View>
       <Animated.FlatList
-        ListHeaderComponent={() => <ListHeader balancePress={balancePress} />}
+        ListHeaderComponent={() => <ListHeader balancePress={balancePress} navigation={navigation} />}
         ItemSeparatorComponent={Divider}
         renderItem={renderItem}
         keyExtractor={item => item.id}

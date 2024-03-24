@@ -3,12 +3,8 @@ import HomeScreen from '@pages/mainScreen/home';
 import TicketScreen from '@pages/mainScreen/ticket';
 import FightwineScreen from '@pages/mainScreen/fightwine';
 import UserScreen from '@pages/mainScreen/user';
-import CustomNavigationBar from '@components/appbar/customNavigationBar';
 import { TabParamList } from './type';
 import { Image } from 'react-native';
-
-import { getGenericPassword } from 'react-native-keychain';
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const HOMEICON = require('@assets/imgs/bottombar/home.png');
