@@ -51,11 +51,9 @@ type IListHeader = {
 const ListHeader = ({ balancePress, navigation }: IListHeader) => {
   const { data, run: userRun } = useRequest(mineInfo, {
     manual: true,
-
   });
   const { data: _userInfo, run } = useRequest(detailsById, {
     manual: true,
-
   });
   /* 用户信息 */
   const userInfo = _userInfo?.data;

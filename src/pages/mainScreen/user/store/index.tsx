@@ -1,16 +1,19 @@
 import BaseLayout from "@components/baselayout"
-import { View } from "react-native"
-import { Text } from "react-native-paper"
 import WebView from "react-native-webview"
+import useLanguageSelect from "../hooks/useFindLanguage"
+
 
 const Store = () => {
+
+  const { data } = useLanguageSelect() 
   return <BaseLayout>
-    <WebView source={{
-      uri: 'http://114.67.231.163:8081/#/me/shop?header=0'
+    {data.language && <WebView source={{
+      uri: `http://114.67.231.163:8081/#/me/shop?have=0&language=${data.language}`
     }}
       style={{
         flex: 1
-      }}></WebView>
+      }} />}
+
   </BaseLayout>
 }
 
