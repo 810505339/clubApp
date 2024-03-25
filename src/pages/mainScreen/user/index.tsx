@@ -32,6 +32,15 @@ const logoIcon = require('@assets/imgs/base/logo.png');
 const editIcon = require('@assets/imgs/user/edit.png');
 const languageIcon = require('@assets/imgs/user/language.png');
 
+/* xitong  */
+const xitong = require('@assets/imgs/user/xitong.png');
+const huodong = require('@assets/imgs/user/huodong.png');
+const zhanghao = require('@assets/imgs/user/zhanghao.png');
+const mendian = require('@assets/imgs/user/mendian.png');
+const fuwu = require('@assets/imgs/user/fuwu.png');
+const lianxi = require('@assets/imgs/user/lianxi.png');
+
+
 
 
 
@@ -54,8 +63,6 @@ const ListHeader = ({ balancePress, navigation }: IListHeader) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      // The screen is focused
-      // Call any action
       run()
       userRun()
     });
@@ -157,12 +164,13 @@ const HomeScreen = () => {
 
   const cells = useMemo(() => {
     return ([
-      { id: 'SystemMessage', title: '系统消息', left: '', right: '' },
-      { id: 'Account', title: '账号与安全', left: '', right: '' },
-      { id: 3, title: '0.2 L&C 门店', left: '', right: '' },
-      { id: 4, title: '服务协议', left: '', right: '' },
-      { id: 5, title: '联系客服', left: '', right: '' },
-      { id: 6, title: '意见反馈', left: '', right: '' },
+      { id: 'SystemMessage', title: '系统消息', left: xitong, right: '' },
+      { id: 'SystemMessage', title: '我的活动', left: huodong, right: '' },
+      { id: 'Account', title: '账号与安全', left: zhanghao, right: '' },
+      { id: 'Store', title: '0.2 L&C 门店', left: mendian, right: '' },
+      { id: 'Agreement', title: '服务协议', left: fuwu, right: '' },
+      { id: 'Service', title: '联系客服', left: lianxi, right: '' },
+
     ]);
   }, []);
 
@@ -180,7 +188,7 @@ const HomeScreen = () => {
   };
 
   const renderItem = ({ item }) => {
-    return (<List.Item title={item.title} right={props => <List.Icon {...props} icon="chevron-right" />} onPress={() => handleItemPress(item)} />);
+    return (<List.Item title={item.title} className='flex-row items-center' left={() => <List.Icon icon={item.left} />} right={props => <List.Icon {...props} icon="chevron-right" />} onPress={() => handleItemPress(item)} />);
   };
 
   return (<BaseLayout className="bg-[#0B0B0BFF]">
@@ -191,7 +199,6 @@ const HomeScreen = () => {
         ItemSeparatorComponent={Divider}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        refreshControl={<RefreshControl refreshing={allData.refreshing} onRefresh={onRefresh} />}
         data={cells}
       />
     </Animated.View>

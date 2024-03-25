@@ -19,6 +19,10 @@ cssInterop(Button, {
   className: 'style'
 })
 
+cssInterop(Text, {
+  className: 'style'
+})
+
 const bg1 = require('@assets/imgs/fightwine/bg1.png');
 const bg2 = require('@assets/imgs/fightwine/bg2.png');
 const bg3 = require('@assets/imgs/fightwine/bg3.png');
@@ -101,8 +105,7 @@ export const Item = (props) => {
       {tags.map((item, index) => (<Text className={`py-1 px-1.5 mr-1.5 rounded-xl ${tagBg(index)}`} key={index} >{item.label}</Text>))}
     </View>
     <View className="mt-5 flex-row ">
-      {/* <ItemCard cards={} />
-      <ItemCard cards={} /> */}
+      {/* <ItemCard /> */}
       <View className="h-6 w-16 justify-self-end justify-center items-center bg-[#FFFFFFE6] rounded-2xl">
         <Text className={`text-xs font-normal ${color}`} onPress={() => onPress(id)} >查看详情</Text>
       </View>

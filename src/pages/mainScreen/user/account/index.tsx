@@ -15,16 +15,16 @@ const Account = () => {
     refreshing: false,
     info: [
       { id: 'AccountPhone', title: '手机', description: '0056-85649653' },
-      { id: '1', title: '登录密码', description: '未设置' },
-      { id: '2', title: '支付密码', description: '未设置' },
+      { id: 'AccountLoginPwd', title: '登录密码', description: '未设置' },
+      { id: 'AccountPayPwd', title: '支付密码', description: '未设置' },
       { id: '3', title: '第三方账号绑定', description: '未设置' },
     ],
     third: [
       { id: 'AccountPhone', title: 'Apple ID', description: '0056-85649653' },
       { id: '1', title: 'Google', description: '未设置' },
-      { id: '2', title: 'Facebook', description: '未设置' },
-      { id: '3', title: 'X', description: '未设置' },
-      { id: '4', title: 'WeChat', description: '未设置' },
+      // { id: '2', title: 'Facebook', description: '未设置' },
+      // { id: '3', title: 'X', description: '未设置' },
+      // { id: '4', title: 'WeChat', description: '未设置' },
     ],
   });
 
