@@ -11,10 +11,11 @@ import Store from '@pages/mainScreen/user/store';
 import Service from '@pages/mainScreen/user/service';
 import Agreement from '@pages/mainScreen/user/agreement';
 
-
-
+import PrivacyRule from '@pages/mainScreen/user/agreement/privacyRule';
+import UserRule from '@pages/mainScreen/user/agreement/userRule';
 
 import { useTranslation } from 'react-i18next';
+
 
 const LoginGroup = () => {
   const { t } = useTranslation();
@@ -52,6 +53,14 @@ const LoginGroup = () => {
     <Stack.Screen
       name="Agreement"
       component={Agreement}
+    />
+    <Stack.Screen
+      name="PrivacyRule"
+      component={PrivacyRule}
+    />
+    <Stack.Screen
+      name="UserRule"
+      component={UserRule}
     />
 
 

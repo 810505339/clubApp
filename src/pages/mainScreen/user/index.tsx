@@ -169,7 +169,7 @@ const HomeScreen = () => {
       { id: 'Account', title: '账号与安全', left: zhanghao, right: '' },
       { id: 'Store', title: '0.2 L&C 门店', left: mendian, right: '' },
       { id: 'Agreement', title: '服务协议', left: fuwu, right: '' },
-      { id: 'Service', title: '联系客服', left: lianxi, right: '' },
+      { id: 'Service', title: '联系我们', left: lianxi, right: '' },
 
     ]);
   }, []);

@@ -39,7 +39,7 @@ export type RootStackParamList = {
   Agreement: undefined,
   Service: undefined,
   UserRule: undefined,
-  privacyRule: undefined,
+  PrivacyRule: undefined,
 
 } & UsertackParamList & HomeParamList & FightParamList;
 
