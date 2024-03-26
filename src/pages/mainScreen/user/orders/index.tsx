@@ -117,7 +117,7 @@ const Item: FC<any> = memo((props) => {
           <Text numberOfLines={2} className="text-[#ffffff] text-sm">{name}</Text>
           <Text className="text-[#ffffff7f] text-xs">{createTime}</Text>
         </View>
-        <Text>${originalAmount}</Text>
+        <Text>${realAmount}</Text>
       </View>
       {orderStatus === IOrderStatus.未支付 && <RenderOrderStatus />}
     </View>
