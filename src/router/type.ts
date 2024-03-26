@@ -35,6 +35,7 @@ export type RootStackParamList = {
   Animated: undefined,
   Carouseldemo: undefined,
   AccountLoginPwd: undefined,
+  AccountPayPwd: undefined,
   Store: undefined,
   Agreement: undefined,
   Service: undefined,

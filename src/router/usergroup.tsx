@@ -2,6 +2,10 @@ import { Stack } from './index';
 import SystemMessage from '@pages/mainScreen/user/systemmessage';
 import SystemMessageInfo from '@pages/mainScreen/user/systemmessage/info';
 import Account from '@pages/mainScreen/user/account';
+import loginPassword from '@pages/mainScreen/user/account/loginPassword';
+import payPwd from '@pages/mainScreen/user/account/payPwd';
+
+
 import Orders from '@pages/mainScreen/user/orders';
 import OrdersInfo from '@pages/mainScreen/user/orders/info';
 import Coupons from '@pages/mainScreen/user/coupons';
@@ -62,6 +66,15 @@ const LoginGroup = () => {
       name="UserRule"
       component={UserRule}
     />
+    <Stack.Screen
+      name="AccountLoginPwd"
+      component={loginPassword}
+    />
+    <Stack.Screen
+      name="AccountPayPwd"
+      component={payPwd}
+    />
+
 
 
     <Stack.Screen name="Orders" component={Orders} />
