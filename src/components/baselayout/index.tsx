@@ -4,6 +4,7 @@ import { ImageBackground, View, type ImageSourcePropType } from 'react-native';
 import { StatusBar, NativeModules, Platform } from 'react-native';
 import { Text } from 'react-native-paper';
 import Loading from './loading';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const defaultBg = require('@assets/imgs/base/default-bg.png');
 
 
@@ -27,7 +28,7 @@ const BaseLayout: FC<PropsWithChildren<IProps>> = ({ source = defaultBg, classNa
   const [statusBarHeight, setStatusBarHeight] = useState<number>(StatusBar.currentHeight! + 56)
 
 
-  
+
   if (Platform.OS === 'ios') {
     const { StatusBarManager } = NativeModules;
     StatusBarManager.getHeight(statusBarHeight => {
@@ -43,7 +44,9 @@ const BaseLayout: FC<PropsWithChildren<IProps>> = ({ source = defaultBg, classNa
     <View className={classNames}>
       {source && <ImageBackground source={source} resizeMode="cover" className="absolute left-0 right-0 bottom-0 -z-10 top-0" />}
       {showAppBar && <View style={{ paddingTop: statusBarHeight }} />}
+      {/* {showNoMore ? <RendernoMoreData /> : children} */}
       {showNoMore ? <RendernoMoreData /> : children}
+   
       {loading && <Loading />}
     </View>
   );
