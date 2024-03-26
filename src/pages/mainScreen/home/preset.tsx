@@ -2,7 +2,7 @@ import BaseLayout from '@components/baselayout';
 import { Image, ImageBackground, TouchableOpacity, View } from 'react-native';
 import { Text, TextInput, IconButton, Divider, Button } from 'react-native-paper';
 import { useImmer } from 'use-immer';
-import DateTimePicker from '@react-native-community/datetimepicker';
+
 import dayjs from 'dayjs';
 import AreaList from './components/areaList';
 import useSelectShop from '@hooks/useSelectShop';
@@ -20,6 +20,7 @@ import Toast from 'react-native-toast-message';
 import useSelectTimer from '@hooks/useSelectTimer';
 import { useTranslation } from 'react-i18next';
 import { ticketBooking } from '@api/ticket';
+import MyDateTimePicker from '@components/DateTimePicker';
 
 /* 预定门票 */
 const tickerBg = require('@assets/imgs/home/preset/ticket-header.png');
@@ -189,7 +190,7 @@ const Preset = () => {
           <View className="mt-7">
             <Text className="text-xs text-white font-semibold opacity-50">{t('common.label2')}</Text>
             <TextInput mode="outlined" className="flex-auto bg-transparent mt-4" showSoftInputOnFocus={false} value={formatDay} outlineStyle={{ borderRadius: 16 }} onPressIn={() => { setShowTime(true); }} right={<TextInput.Icon icon="calendar" />} />
-            {showTime && <DateTimePicker onChange={onChange} value={time} mode="datetime" minimumDate={new Date()} />}
+            {showTime && <MyDateTimePicker onChange={onChange} value={time} mode="datetime" />}
           </View>
           <View className="mt-7">
             <Text className="text-xs text-white font-semibold opacity-50 mb-4">{t('common.label3')}</Text>

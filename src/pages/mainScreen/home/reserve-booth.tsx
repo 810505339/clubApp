@@ -15,6 +15,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@router/type';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
+import MyDateTimePicker from '@components/DateTimePicker';
 
 const card_2 = require('@assets/imgs/base/card_2.png');
 const icon = require('@assets/imgs/home/preset/icon.png');
@@ -109,13 +110,13 @@ const ReserveBooth = () => {
             <View className="mt-7">
               <Text className="text-xs text-white font-semibold opacity-50">{t('common.label2')}</Text>
               <TextInput mode="outlined" className="flex-auto bg-transparent mt-4" showSoftInputOnFocus={false} value={formatDay} outlineStyle={{ borderRadius: 16 }} onPressIn={() => { setShowTime(true); }} right={<TextInput.Icon icon="calendar" />} />
-              {showTime && <DateTimePicker onChange={onChange} value={time} minimumDate={new Date()} />}
+              {showTime && <MyDateTimePicker onChange={onChange} value={time} />}
             </View>
             {/* 最晚到场时间 */}
             <View className="mt-7">
               <Text className="text-xs text-white font-semibold opacity-50">{t('reserveBooth.label1')}</Text>
               <TextInput mode="outlined" className="flex-auto bg-transparent mt-4" showSoftInputOnFocus={false} value={formatTimer} outlineStyle={{ borderRadius: 16 }} onPressIn={() => { setShowTime1(true); }} right={<TextInput.Icon icon="timer" />} />
-              {showTime1 && <DateTimePicker mode="time" is24Hour onChange={checkTime} value={time1} />}
+              {showTime1 && <MyDateTimePicker mode="time" is24Hour onChange={checkTime} value={time1} />}
             </View>
             {/* 到店人数 */}
             <View className="mt-7 flex-row items-center justify-between">
