@@ -186,7 +186,7 @@ const HomeScreen = () => {
   };
 
   const renderItem = ({ item }) => {
-    return (<List.Item title={item.title} className='flex-row items-center' left={() => <List.Icon icon={item.left} />} right={props => <List.Icon {...props} icon="chevron-right" />} onPress={() => handleItemPress(item)} />);
+    return (<List.Item title={item.title} className='flex-row items-center pl-5' left={() => <List.Icon icon={item.left} />} right={props => <List.Icon {...props} icon="chevron-right" />} onPress={() => handleItemPress(item)} />);
   };
 
   return (<BaseLayout className="bg-[#0B0B0BFF]">

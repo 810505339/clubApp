@@ -81,7 +81,10 @@ service.interceptors.response.use((response) => {
 	const data = response.data;
 
 	if (!data.success) {
-		Toast.show({ text1: data?.msg });
+		if (data?.msg) {
+			Toast.show({ text1: data?.msg });
+		}
+
 	}
 
 	return response;

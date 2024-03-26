@@ -28,6 +28,7 @@ const HomeTabs = () => {
   return (
     <Navigator initialRouteName="Home" screenOptions={({ route }) => {
       return {
+        gestureEnabled: false,
         headerTransparent: true,
         tabBarShowLabel: false,
         tabBarActiveTintColor: '#E6A055FF',
