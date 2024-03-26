@@ -15,8 +15,6 @@ import Homegroup from './homegroup';
 import UserGroup from './usergroup';
 import FightGroup from './fightgroup';
 import DemoGroup from './DemoGroup';
-
-
 import BlurviewDEmo from '@pages/demoScreen/blurview';
 import CouponsModal from '@pages/mainScreen/user/coupons/modal';
 import AuthenticationCamera from '@pages/LoginScreen/authentication/camera';

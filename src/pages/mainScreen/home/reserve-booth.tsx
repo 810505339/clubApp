@@ -1,7 +1,7 @@
 import BaseLayout from '@components/baselayout';
 import Panel from '@components/panel';
 import CustomModal from '@components/custom-modal';
-import { ImageBackground, View, ScrollView } from 'react-native';
+import { ImageBackground, View, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { Button, Divider, Text, TextInput } from 'react-native-paper';
 import AreaList from './components/areaList';
 import useSelectShop from '@hooks/useSelectShop';
@@ -14,11 +14,24 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '@router/type';
 import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
 const card_2 = require('@assets/imgs/base/card_2.png');
-
+const icon = require('@assets/imgs/home/preset/icon.png');
 const ReserveBooth = () => {
   const navgation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+
+  useEffect(() => {
+    navgation.setOptions({
+      headerRight: () => <TouchableOpacity onPress={toRuleUrl}>
+        <View className="border-[#EE2737] border py-1 px-2 rounded-3xl text-[#EE2737] flex-row items-center">
+          <Image source={icon} className="w-6 h-6 mr-1" />
+          <Text style={{ color: '#EE2737' }}>预定规则</Text>
+        </View>
+      </TouchableOpacity>
+    })
+  }, [navgation])
   const { t } = useTranslation();
   const { snap, bottomSheetModalRef, shop, onPress, shopName, showShop } = useSelectShop();
   const { time,
@@ -69,6 +82,13 @@ const ReserveBooth = () => {
       peopleNum: data.num,
     });
   };
+
+  function toRuleUrl() {
+    navgation.navigate('PresetRule', {
+      type: 'BOOTH_RESERVE_RULE'
+    });
+
+  }
 
   return (<BaseLayout>
     <CustomModal ref={bottomSheetModalRef} data={snap.shopList} selectValue={shop.select.id} onPress={onPress} headerText="选择门店" snapPoints={['50%']} />

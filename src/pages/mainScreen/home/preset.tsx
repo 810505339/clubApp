@@ -124,7 +124,9 @@ const Preset = () => {
   };
   /* 规则弹窗 */
   const toRuleUrl = () => {
-    navgation.navigate('PresetRule');
+    navgation.navigate('PresetRule', {
+      type: 'TICKET_RESERVE_RULE'
+    });
   }
 
 
@@ -160,7 +162,7 @@ const Preset = () => {
 
   useEffect(() => {
     navgation.setOptions({
-      headerRight: () => <TouchableOpacity>
+      headerRight: () => <TouchableOpacity onPress={toRuleUrl}>
         <View className="border-[#EE2737] border py-1 px-2 rounded-3xl text-[#EE2737] flex-row items-center">
           <Image source={icon} className="w-6 h-6 mr-1" />
           <Text style={{ color: '#EE2737' }}>预定规则</Text>

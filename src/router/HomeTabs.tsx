@@ -23,8 +23,6 @@ const { Navigator, Screen } = createBottomTabNavigator<TabParamList>();
 
 const HomeTabs = () => {
   const { t } = useTranslation();
-
-
   return (
     <Navigator initialRouteName="Home" screenOptions={({ route }) => {
       return {

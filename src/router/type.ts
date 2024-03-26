@@ -41,6 +41,9 @@ export type RootStackParamList = {
   Service: undefined,
   UserRule: undefined,
   PrivacyRule: undefined,
+  PresetRule: {
+    type: string
+  }
 
 } & UsertackParamList & HomeParamList & FightParamList;
 
