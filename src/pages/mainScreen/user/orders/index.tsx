@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next';
 import Dialog from '@components/dialog';
 import ListHeaderComponent from './components/ListHeaderComponent';
 import { useInterval } from 'ahooks';
+import { TFunction } from 'i18next';
 /* 预定门票 */
 const card1Image = require('assets/imgs/base/card_1.png');
 /* 拼酒局 */
@@ -48,10 +49,7 @@ const getImage = (orderType: IOrderType, img: string) => {
     return card1Image;
   }
 };
-/* 根据不同的type获取OrderContext */
-const getOrderContext = (orderType: IOrderType) => {
-  //todo
-};
+
 
 
 const Item: FC<any> = memo((props) => {
@@ -212,15 +210,54 @@ const Orders = () => {
     const img = fileStore.fileUrl + '/' + (item.picture?.fileName ?? '');
     console.log(data);
 
+    /* 根据不同的type获取OrderContext */
+
+    function getOrderContext(orderType: IOrderType) {
+      let initList: { label: string; value: any; }[] = []
+
+      if (orderType === IOrderType.拼酒局) {
+        initList = [
+          { label: '', value: data?.productName },
+        ]
+      }
+
+      if (orderType === IOrderType.预定卡座) {
+        initList = [
+          { label: '已选套餐', value: data?.productName },
+        ]
+      }
+      if (orderType === IOrderType.预定门票) {
+        initList = [
+          { label: '商品名称', value: data?.productName },
+        ]
+      }
+
+      const list = [
+        { label: '所选门店', value: data?.storeName },
+        { label: '所选区域', value: data?.areaName },
+        { label: '所选卡座', value: data?.bootName },
+        { label: '活动名称', value: '' },
+        { label: '活动地点', value: '' },
+        { label: '费用用途', value: data?.useOfExpenses },
+        { label: '活动时间', value: data?.activityTime },
+        { label: '创建时间', value: data?.createTime },
+        ...initList,
+        { label: '商品数量', value: data?.productNum },
+        { label: '最晚到场时间', value: data?.entranceDate ? (data?.entranceDate + (data?.latestArrivalTime ?? '')) : null },
+        { label: '支付方式', value: '微信支付' },
+        { label: '支付状态', value: item.orderStatus },
+        { label: '优惠金额', value: data?.discountAmount != 0 ? <Text className='text-[#FF2C2C]'>{'-$' + data?.discountAmount}</Text> : null },
+        { label: '优惠券', value: data?.discountDetail?.name },
+        { label: '应付金额', value: '$' + data.originalAmount },
+      ]
+
+      return list
+    }
+
+
 
     navigation.navigate('OrdersInfo', {
-      orderContext: [
-        { label: t('orders.label8'), value: data.productName },
-        { label: t('orders.label9'), value: data.productNum },
-        { label: t('orders.label2'), value: data.areaName },
-        { label: t('orders.label6'), value: data.latestArrivalTime },
-
-      ],
+      orderContext: getOrderContext(item.orderType),
       headerImg: getImage(item.orderType, img),
       submit: async () => {
         await tempPay(item.orderId);

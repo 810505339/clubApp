@@ -23,16 +23,23 @@ import { useRequest } from 'ahooks';
 import { myTicket } from '@api/ticket';
 import CustomFlatList from '@components/custom-flatlist';
 import QRCode from 'react-native-qrcode-svg';
+import { cssInterop } from 'nativewind'
+
+cssInterop(Image, {
+  className: 'style'
+})
+
+const expiredIcon = require('@assets/imgs/ticket/expired.png');
+const usedIcon = require('@assets/imgs/ticket/used.png');
 
 const qrCodeImage = require('@assets/imgs/base/qrcode.png');
 const modalBg = require('@assets/imgs/modal/ticket-head-bg.png');
 const modalIcon = require('@assets/imgs/modal/ticket-icon.png');
 
+
 const style = StyleSheet.create({
   modal: {
-
     height: 400,
-
   },
 });
 
@@ -40,8 +47,17 @@ const style = StyleSheet.create({
 const Item = memo<any>((props: any) => {
   console.log('renderItem');
 
-  const { entranceDate, usableTimeBegin, usableTimeEnd, areaName, boothName, usageType, latestArrivalTime, handleItemPress, ticketPicture, remainNum } = props;
+  const { entranceDate, usableTimeBegin, usableTimeEnd, areaName, boothName, usageType, latestArrivalTime, handleItemPress, ticketPicture, remainNum, status } = props;
 
+  let img = null
+
+  if (status === 'USED') {
+    img = usedIcon
+  }
+
+  if (status === 'EXPIRED') {
+    img = expiredIcon
+  }
   const useTime = usageType === 'TICKET' ? `${usableTimeBegin}-${usableTimeEnd}使用` : `最迟入场${latestArrivalTime}`;
   const NumberRender = remainNum && <View className="bg-[#000000] rounded-xl absolute p-2 bottom-2 left-5">
     <Text>
@@ -51,7 +67,8 @@ const Item = memo<any>((props: any) => {
   </View>;
 
   return <TouchableWithoutFeedback onPress={() => handleItemPress()}>
-    <View className="w-80 h-32 bg-[#FFFFFF1A] mx-auto  my-3   justify-center flex-row items-center rounded-xl border py-5 ">
+    <View className="mx-10 h-32 bg-[#FFFFFF1A]  my-3 relative   justify-center flex-row items-center rounded-xl border py-5 ">
+      {img && <Image source={img} className='absolute bottom-0 right-0 h-32  w-32' resizeMethod='scale' />}
       <View className="w-36 h-24 relative  rounded-xl -left-5 ">
         {ticketPicture && <Image source={{ uri: ticketPicture }} className="w-36 h-24 rounded-xl" />}
         {NumberRender}
@@ -153,7 +170,7 @@ const TicketScreen = () => {
             tabs.map((tab, index) => (
               <TabScreen label={tab.title} key={index}>
                 <View className="bg-transparent">
-                  {index === data.defaultIndex && <CustomFlatList keyExtractor={getId} params={{ status: tabs[index].status }} renderItem={(item) => <Item  {...item} handleItemPress={handleItemPress} />} onFetchData={api} />}
+                  {index === data.defaultIndex && <CustomFlatList keyExtractor={getId} params={{ status: tabs[index].status }} renderItem={(item) => <Item  {...item} status={item.status} handleItemPress={handleItemPress} />} onFetchData={api} />}
                 </View>
               </TabScreen>
             ))

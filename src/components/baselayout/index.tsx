@@ -4,7 +4,7 @@ import { ImageBackground, View, type ImageSourcePropType } from 'react-native';
 import { StatusBar, NativeModules, Platform } from 'react-native';
 import { Text } from 'react-native-paper';
 import Loading from './loading';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 const defaultBg = require('@assets/imgs/base/default-bg.png');
 
 
@@ -46,7 +46,6 @@ const BaseLayout: FC<PropsWithChildren<IProps>> = ({ source = defaultBg, classNa
       {showAppBar && <View style={{ paddingTop: statusBarHeight }} />}
       {/* {showNoMore ? <RendernoMoreData /> : children} */}
       {showNoMore ? <RendernoMoreData /> : children}
-   
       {loading && <Loading />}
     </View>
   );
