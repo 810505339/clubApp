@@ -537,7 +537,7 @@ const FightwineDetail = () => {
 
 
     {
-      if (res.isJoined && res.status === STATE.待入场) {
+      if (res.isJoined && (res.status === STATE.待入场 || res.status === STATE.已入场) && res.joinStatus === 'IN') {
         return (
           <View className="flex-row  items-center justify-around">
             <Button mode={'outlined'} className="bg-[#101010] w-[126]" style={{ borderColor: '#EE2737' }} textColor="#EE2737FF" >查看门票</Button>

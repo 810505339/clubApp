@@ -7,24 +7,43 @@ import { RootStackParamList, UsertackParamList } from '@router/type';
 import { useImmer } from 'use-immer';
 import storage from '@storage/index';
 import { resetGenericPassword } from 'react-native-keychain';
+import { useRequest } from 'ahooks';
+import { detailsById } from '@api/user';
 
 const Account = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  useRequest(detailsById, {
+    onSuccess: (res) => {
+      console.log(res);
+
+      setData((draft) => {
+        draft.info[0].description = res.data?.phone ?? '未设置';
+        draft.info[1].description = res.data?.setPassword ? '已设置' : '未设置';
+        draft.info[2].description = res.data?.setPayPassword ? '已设置' : '未设置';
+        draft.info[3].description = res.data?.wxOpenid ? '已设置' : '未设置';
+        // draft.third[0].description = res.data?.wxOpenid ? '已设置' : '未设置';
+        // draft.third[0].description = res.data?.wxOpenid ? '已设置' : '未设置';
+      })
+
+    }
+  });
+
+
 
   const [data, setData] = useImmer({
     refreshing: false,
     info: [
-      { id: 'AccountPhone', title: '手机', description: '0056-85649653' },
-      { id: '1', title: '登录密码', description: '未设置' },
-      { id: '2', title: '支付密码', description: '未设置' },
+      { id: 'AccountPhone', title: '手机', description: '未设置' },
+      { id: 'AccountLoginPwd', title: '登录密码', description: '未设置' },
+      { id: 'AccountPayPwd', title: '支付密码', description: '未设置' },
       { id: '3', title: '第三方账号绑定', description: '未设置' },
     ],
     third: [
-      { id: 'AccountPhone', title: 'Apple ID', description: '0056-85649653' },
-      { id: '1', title: 'Google', description: '未设置' },
-      { id: '2', title: 'Facebook', description: '未设置' },
-      { id: '3', title: 'X', description: '未设置' },
-      { id: '4', title: 'WeChat', description: '未设置' },
+      // { id: 'AccountPhone', title: 'Apple ID', description: '0056-85649653' },
+      // { id: '1', title: 'Google', description: '未设置' },
+      // { id: '2', title: 'Facebook', description: '未设置' },
+      // { id: '3', title: 'X', description: '未设置' },
+      // { id: '4', title: 'WeChat', description: '未设置' },
     ],
   });
 
@@ -62,7 +81,7 @@ const Account = () => {
           renderItem={renderItem} />
       </View>
     </View>
-    <View className="p-2">
+    {/* <View className="p-2">
       <Text className="pl-2 font-bold my-4">第三方账号绑定</Text>
       <View className="rounded-xl border border-[#343434] bg-[#191919]">
         <FlatList
@@ -71,7 +90,7 @@ const Account = () => {
           keyExtractor={(item) => item.id}
           renderItem={renderItem} />
       </View>
-    </View>
+    </View> */}
     <View className="p-5 flex-1 flex-row items-end">
       <Button mode="outlined" className="flex-1" textColor="white" onPress={handleOut} >退出登录</Button>
     </View>

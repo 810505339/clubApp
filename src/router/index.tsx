@@ -15,8 +15,6 @@ import Homegroup from './homegroup';
 import UserGroup from './usergroup';
 import FightGroup from './fightgroup';
 import DemoGroup from './DemoGroup';
-
-
 import BlurviewDEmo from '@pages/demoScreen/blurview';
 import CouponsModal from '@pages/mainScreen/user/coupons/modal';
 import AuthenticationCamera from '@pages/LoginScreen/authentication/camera';
@@ -39,6 +37,11 @@ const AppNavigator = () => {
           component={AuthenticationCamera}
           options={{ title: '', headerShown: false }}
         />
+        <Stack.Screen
+          name="HomeTabs"
+          component={HomeTabs}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="IM" component={IM} />
         <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="Animated" component={AnimatedScreen} />
@@ -49,11 +52,7 @@ const AppNavigator = () => {
         {Homegroup()}
         {UserGroup()}
         {FightGroup()}
-        <Stack.Screen
-          name="HomeTabs"
-          component={HomeTabs}
-          options={{ headerShown: false }}
-        />
+
 
         <Stack.Screen name="CouponsModal" component={CouponsModal} options={{ presentation: 'modal' }} />
 

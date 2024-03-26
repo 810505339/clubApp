@@ -4,7 +4,17 @@ import { StyleSheet, View } from 'react-native';
 import { BottomSheetFooter, BottomSheetModal, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import { Button, RadioButton, Text } from 'react-native-paper';
 import FastImage from 'react-native-fast-image';
+import { cssInterop } from 'nativewind'
+
+cssInterop(FastImage, {
+  className: 'style'
+})
+
+cssInterop(Text, {
+  className: 'style'
+})
 const headerIcon = require('@assets/imgs/base/header.png');
+
 
 export type IItemProp = {
   name: string,
@@ -29,7 +39,7 @@ const ListHeaderComponent: FC<{ headerText?: string }> = ({ headerText = 'æ ‡ é¢
     <View className="h-full flex items-center">
       <View className="rounded w-10 h-1  mt-2 bg-[#0B0B0B]" />
       <View className="h-12 justify-center">
-        <Text className="text-lg font-bold text-white" >{headerText}</Text>
+        <Text className="text-lg font-bold " style={{ color: '#fff' }} >{headerText}</Text>
       </View >
     </View >
   </View >;

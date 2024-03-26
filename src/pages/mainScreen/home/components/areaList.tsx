@@ -1,11 +1,17 @@
 import { FC, useEffect } from 'react';
-import { View, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, TouchableOpacity, ImageBackground, useWindowDimensions, FlatList, StyleSheet } from 'react-native';
 import { Text } from 'react-native-paper';
 import Animated from 'react-native-reanimated';
 import { useImmer } from 'use-immer';
 import { getAreaById } from '@api/store';
 import dayjs from 'dayjs';
 import { fileStore } from '@store/getfileurl';
+const DATA = [
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'First Item',
+  },
+];
 
 type IProps = {
   onPress: (index: number) => void
@@ -13,8 +19,10 @@ type IProps = {
   activeIndex: number,
   name: string,
   businessDateVOS: any[],
-  pictureFIleVOs: any[]
+  pictureFIleVOs: any[],
+  id: string
 }
+
 
 
 const AreaItem = (props: IProps) => {
@@ -41,11 +49,15 @@ export type IAreaListProps = {
 }
 const AreaList: FC<IAreaListProps> = (props) => {
   const { storeId, date, onChange } = props;
+
+  const { width } = useWindowDimensions()
   const [data, setData] = useImmer({
     cells: [],
     activeIndex: 0,
   });
   const onPress = (index: number) => {
+    console.log(index, 'index');
+
     setData(draft => {
       draft.activeIndex = index;
     });
@@ -63,7 +75,7 @@ const AreaList: FC<IAreaListProps> = (props) => {
     setData(draft => {
       const list = res ?? [];
       draft.cells = list;
-        draft.activeIndex = 0;
+      draft.activeIndex = 0;
       onChange(list, 0);
     });
 
@@ -75,12 +87,34 @@ const AreaList: FC<IAreaListProps> = (props) => {
     if (storeId && date) {
       getAreaByIdApi();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, [storeId, date]);
 
-  return <Animated.FlatList horizontal showsHorizontalScrollIndicator={false} data={data.cells} keyExtractor={item => item.id} renderItem={({ index, item }) => <AreaItem {...item} index={index} activeIndex={data.activeIndex} onPress={onPress} />} />;
+  if (data.cells.length <= 3) {
+    return <View className='flex flex-row'>
+      {(data.cells as Array<IProps>).map((item, index) => {
+        return <AreaItem {...item} key={item.id} activeIndex={data.activeIndex}
+          onPress={onPress} index={index} />
+      })}
+    </View>
+  }
+
+  return <FlatList
+
+    horizontal
+
+    data={data.cells}
+    keyExtractor={item => item.id}
+    renderItem={({ index, item }) =>
+      <AreaItem {...(item as IProps)}
+        index={index}
+        activeIndex={data.activeIndex}
+        onPress={onPress} />}
+  />;
+
 
 };
+
 
 export default AreaList;
 

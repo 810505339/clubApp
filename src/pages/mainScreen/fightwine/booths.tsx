@@ -17,6 +17,8 @@ import { checkBooth, calPayAmount, create } from '@api/fightwine';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import useSelectShop from '@hooks/useSelectShop';
 import { useRequest } from 'ahooks';
+import useUserInfo from '@hooks/useUserInfo';
+
 const boy = require('@assets/imgs/fightwine/boys.png');
 const girls = require('@assets/imgs/fightwine/girls.png');
 const width = Dimensions.get('window').width;
@@ -29,9 +31,17 @@ const Booths = () => {
   const { booths, itemPress } = useSelectBooths({ areaId, entranceDate });
   const file = fileStore.fileUrl;
   const { t } = useTranslation();
+
+  const { userInfoStorage } = useUserInfo()
+  const gender = userInfoStorage?.userInfo?.gender
+
+
+
   const [data, setData] = useImmer({
     maleNum: 0,
+    minmaleNum: 0,
     femaleNum: 0,
+    minfemaleNum: 0,
     autoLock: false,
     visible: false,
     selectPackage: {},
@@ -44,6 +54,25 @@ const Booths = () => {
   });
 
 
+
+  useEffect(() => {
+    // /* 获取性别 */
+    // const gender = userInfoStorage.userinfo.gender
+
+
+    setData(draft => {
+      if (gender == '1') {
+        draft.minmaleNum = 1
+        draft.maleNum = 1
+      }
+
+      if (gender == '2') {
+        draft.minfemaleNum = 1
+        draft.femaleNum = 1
+      }
+    })
+
+  }, [gender])
 
   const changePackage = (list: any[], index: number | undefined) => {
     if (index != undefined) {
@@ -175,16 +204,16 @@ const Booths = () => {
                 <Text className="text-2xl font-semibold m-auto">男</Text>
               </View>
             </View>
-            <NumberInput num={data.maleNum} onChange={(num) => onPresonChange(num, 'maleNum')} onVerify={(num) => onVerify(num, 'femaleNum')} />
+            <NumberInput num={data.maleNum} min={data.minmaleNum} onChange={(num) => onPresonChange(num, 'maleNum')} onVerify={(num) => onVerify(num, 'femaleNum')} />
           </View>
           <View className="flex-col  items-center">
             <View className=" w-[100px]  h-[100px] mb-2.5">
               <Image source={girls} className="flex-auto" />
               <View className=" absolute z-10 left-0 right-0 top-0 bottom-0 justify-center items-center">
-                <Text className="  text-2xl font-semibold m-auto">女</Text>
+                <Text className="text-2xl font-semibold m-auto">女</Text>
               </View>
             </View>
-            <NumberInput num={data.femaleNum} onChange={(num) => onPresonChange(num, 'femaleNum')} onVerify={(num) => onVerify(num, 'maleNum')} />
+            <NumberInput num={data.femaleNum} min={data.minfemaleNum} onChange={(num) => onPresonChange(num, 'femaleNum')} onVerify={(num) => onVerify(num, 'maleNum')} />
           </View>
         </View>
       </View>),

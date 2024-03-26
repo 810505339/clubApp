@@ -12,7 +12,6 @@ const AccountSetPhone = () => {
   const navigation = useNavigation<NativeStackNavigationProp<UsertackParamList>>();
   const hadleNext = ()=>{
     navigation.navigate('AccountPhone');
-
   };                                       
 
   return (<BaseLayout>

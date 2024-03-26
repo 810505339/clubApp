@@ -14,6 +14,14 @@ import useMode from './hooks/useMode';
 import { useEffect } from 'react';
 import CustomNavigationBar from '@components/appBar/customNavigationBar';
 import { HeaderButtonProps } from '@react-navigation/native-stack/lib/typescript/src/types';
+import { cssInterop } from 'nativewind'
+cssInterop(Button, {
+  className: 'style'
+})
+
+cssInterop(Text, {
+  className: 'style'
+})
 
 const bg1 = require('@assets/imgs/fightwine/bg1.png');
 const bg2 = require('@assets/imgs/fightwine/bg2.png');
@@ -97,8 +105,7 @@ export const Item = (props) => {
       {tags.map((item, index) => (<Text className={`py-1 px-1.5 mr-1.5 rounded-xl ${tagBg(index)}`} key={index} >{item.label}</Text>))}
     </View>
     <View className="mt-5 flex-row ">
-      {/* <ItemCard cards={} />
-      <ItemCard cards={} /> */}
+      {/* <ItemCard /> */}
       <View className="h-6 w-16 justify-self-end justify-center items-center bg-[#FFFFFFE6] rounded-2xl">
         <Text className={`text-xs font-normal ${color}`} onPress={() => onPress(id)} >查看详情</Text>
       </View>

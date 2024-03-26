@@ -33,7 +33,17 @@ export type RootStackParamList = {
   Demo: undefined,
   IM: undefined,
   Animated: undefined,
-  Carouseldemo: undefined
+  Carouseldemo: undefined,
+  AccountLoginPwd: undefined,
+  AccountPayPwd: undefined,
+  Store: undefined,
+  Agreement: undefined,
+  Service: undefined,
+  UserRule: undefined,
+  PrivacyRule: undefined,
+  PresetRule: {
+    type: string
+  }
 
 } & UsertackParamList & HomeParamList & FightParamList;
 

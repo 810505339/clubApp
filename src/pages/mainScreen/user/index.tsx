@@ -13,11 +13,13 @@ import { detailsById, mineInfo } from '@api/user';
 import CustomModal from '@components/custom-modal';
 import useLanguageSelect from './hooks/useLanguageSelect';
 import { useImmer } from 'use-immer';
-// import { cssInterop } from 'nativewind'
+import { cssInterop } from 'nativewind'
 
-// cssInterop(Appbar.Header, {
-//   className: 'style'
-// })
+
+
+cssInterop(Appbar.Header, {
+  className: 'style'
+})
 
 const bg1Icon = require('@assets/imgs/user/bg_1.png');
 const bg2Icon = require('@assets/imgs/user/bg_2.png');
@@ -30,18 +32,42 @@ const logoIcon = require('@assets/imgs/base/logo.png');
 const editIcon = require('@assets/imgs/user/edit.png');
 const languageIcon = require('@assets/imgs/user/language.png');
 
+/* xitong  */
+const xitong = require('@assets/imgs/user/xitong.png');
+const huodong = require('@assets/imgs/user/huodong.png');
+const zhanghao = require('@assets/imgs/user/zhanghao.png');
+const mendian = require('@assets/imgs/user/mendian.png');
+const fuwu = require('@assets/imgs/user/fuwu.png');
+const lianxi = require('@assets/imgs/user/lianxi.png');
+
+
 
 
 
 type IListHeader = {
   balancePress: (name: string) => void
+  navigation: NativeStackNavigationProp<UsertackParamList>
 }
-const ListHeader = ({ balancePress }: IListHeader) => {
-  const { data } = useRequest(mineInfo);
-  const { data: _userInfo } = useRequest(detailsById);
+const ListHeader = ({ balancePress, navigation }: IListHeader) => {
+  const { data, run: userRun } = useRequest(mineInfo, {
+    manual: true,
+  });
+  const { data: _userInfo, run } = useRequest(detailsById, {
+    manual: true,
+  });
   /* 用户信息 */
   const userInfo = _userInfo?.data;
   const info = data?.data;
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      run()
+      userRun()
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation])
 
 
   const fontText = 'text-xs text-[#ffffff7f]';
@@ -136,12 +162,13 @@ const HomeScreen = () => {
 
   const cells = useMemo(() => {
     return ([
-      { id: 'SystemMessage', title: '系统消息', left: '', right: '' },
-      { id: 'Account', title: '账号与安全', left: '', right: '' },
-      { id: 3, title: '0.2 L&C 门店', left: '', right: '' },
-      { id: 4, title: '服务协议', left: '', right: '' },
-      { id: 5, title: '联系客服', left: '', right: '' },
-      { id: 6, title: '意见反馈', left: '', right: '' },
+      { id: 'SystemMessage', title: '系统消息', left: xitong, right: '' },
+      { id: 'SystemMessage', title: '我的活动', left: huodong, right: '' },
+      { id: 'Account', title: '账号与安全', left: zhanghao, right: '' },
+      { id: 'Store', title: '0.2 L&C 门店', left: mendian, right: '' },
+      { id: 'Agreement', title: '服务协议', left: fuwu, right: '' },
+      { id: 'Service', title: '联系我们', left: lianxi, right: '' },
+
     ]);
   }, []);
 
@@ -159,18 +186,17 @@ const HomeScreen = () => {
   };
 
   const renderItem = ({ item }) => {
-    return (<List.Item title={item.title} right={props => <List.Icon {...props} icon="chevron-right" />} onPress={() => handleItemPress(item)} />);
+    return (<List.Item title={item.title} className='flex-row items-center pl-5' left={() => <List.Icon icon={item.left} />} right={props => <List.Icon {...props} icon="chevron-right" />} onPress={() => handleItemPress(item)} />);
   };
 
   return (<BaseLayout className="bg-[#0B0B0BFF]">
     <CheckAuthLayout />
     <Animated.View>
       <Animated.FlatList
-        ListHeaderComponent={() => <ListHeader balancePress={balancePress} />}
+        ListHeaderComponent={() => <ListHeader balancePress={balancePress} navigation={navigation} />}
         ItemSeparatorComponent={Divider}
         renderItem={renderItem}
         keyExtractor={item => item.id}
-        refreshControl={<RefreshControl refreshing={allData.refreshing} onRefresh={onRefresh} />}
         data={cells}
       />
     </Animated.View>

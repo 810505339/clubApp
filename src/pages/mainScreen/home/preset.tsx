@@ -1,8 +1,8 @@
 import BaseLayout from '@components/baselayout';
-import { Image, ImageBackground, View } from 'react-native';
+import { Image, ImageBackground, TouchableOpacity, View } from 'react-native';
 import { Text, TextInput, IconButton, Divider, Button } from 'react-native-paper';
 import { useImmer } from 'use-immer';
-import DateTimePicker from '@react-native-community/datetimepicker';
+
 import dayjs from 'dayjs';
 import AreaList from './components/areaList';
 import useSelectShop from '@hooks/useSelectShop';
@@ -20,10 +20,12 @@ import Toast from 'react-native-toast-message';
 import useSelectTimer from '@hooks/useSelectTimer';
 import { useTranslation } from 'react-i18next';
 import { ticketBooking } from '@api/ticket';
+import MyDateTimePicker from '@components/DateTimePicker';
 
 /* 预定门票 */
 const tickerBg = require('@assets/imgs/home/preset/ticket-header.png');
 const card_1 = require('@assets/imgs/base/card_1.png');
+const icon = require('@assets/imgs/home/preset/icon.png');
 
 const defaultData = {
   remainingNum: 0, //剩余票数
@@ -45,6 +47,9 @@ const Preset = () => {
     setShowTime } = useSelectTimer();
 
   const navgation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+
+
   const { t } = useTranslation();
 
   const { run, refresh, loading } = useRequest(onSaleNum, {
@@ -118,6 +123,12 @@ const Preset = () => {
 
     });
   };
+  /* 规则弹窗 */
+  const toRuleUrl = () => {
+    navgation.navigate('PresetRule', {
+      type: 'TICKET_RESERVE_RULE'
+    });
+  }
 
 
 
@@ -150,6 +161,18 @@ const Preset = () => {
   ]);
 
 
+  useEffect(() => {
+    navgation.setOptions({
+      headerRight: () => <TouchableOpacity onPress={toRuleUrl}>
+        <View className="border-[#EE2737] border py-1 px-2 rounded-3xl text-[#EE2737] flex-row items-center">
+          <Image source={icon} className="w-6 h-6 mr-1" />
+          <Text style={{ color: '#EE2737' }}>预定规则</Text>
+        </View>
+      </TouchableOpacity>
+    })
+  }, [navgation])
+
+
 
   return (<BaseLayout className="" loading={loading}>
     <CustomModal ref={bottomSheetModalRef} data={snap.shopList} selectValue={shop.select.id} onPress={onPress} headerText="选择门店" snapPoints={['50%']} />
@@ -167,7 +190,7 @@ const Preset = () => {
           <View className="mt-7">
             <Text className="text-xs text-white font-semibold opacity-50">{t('common.label2')}</Text>
             <TextInput mode="outlined" className="flex-auto bg-transparent mt-4" showSoftInputOnFocus={false} value={formatDay} outlineStyle={{ borderRadius: 16 }} onPressIn={() => { setShowTime(true); }} right={<TextInput.Icon icon="calendar" />} />
-            {showTime && <DateTimePicker onChange={onChange} value={time} />}
+            {showTime && <MyDateTimePicker onChange={onChange} value={time} mode="datetime" />}
           </View>
           <View className="mt-7">
             <Text className="text-xs text-white font-semibold opacity-50 mb-4">{t('common.label3')}</Text>
