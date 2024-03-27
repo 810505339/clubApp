@@ -53,7 +53,7 @@ const getImage = (orderType: IOrderType, img: string) => {
 
 
 const Item: FC<any> = memo((props) => {
-  const { name, orderStatus, handleItemPress, orderType, createTime, originalAmount, picture, cancel, orderId, payEndTime } = props;
+  const { name, orderStatus, handleItemPress, orderType, createTime, originalAmount, picture, cancel, orderId, payEndTime, realAmount } = props;
   const img = fileStore.fileUrl + '/' + (picture?.fileName ?? '');
 
   const PayEndTimeRender = (props: { payEndTime: string }) => {

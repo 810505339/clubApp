@@ -581,11 +581,11 @@ const FightwineDetail = () => {
   };
 
   /* 如果没有验证人脸 */
-  if (!userInfo?.checkFace) {
-    return <BaseLayout >
-      <Text>请认证人脸</Text>
-    </BaseLayout>;
-  }
+  // if (!userInfo?.checkFace) {
+  //   return <BaseLayout >
+  //     <Text>请认证人脸</Text>
+  //   </BaseLayout>;
+  // }
 
   return <BaseLayout>
     {loading ? <Loading /> : <>

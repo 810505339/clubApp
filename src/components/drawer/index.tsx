@@ -1,4 +1,4 @@
-import { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetBackgroundProps, BottomSheetModal, BottomSheetProps, BottomSheetScrollView  } from '@gorhom/bottom-sheet';
+import { BottomSheetBackdrop, BottomSheetBackdropProps, BottomSheetBackgroundProps, BottomSheetModal, BottomSheetProps, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescript/types';
 import { FC, useCallback, useMemo, useRef, forwardRef } from 'react';
 import { View } from 'react-native';
@@ -8,11 +8,9 @@ import LinearGradient from 'react-native-linear-gradient';
 import Animated, { useAnimatedStyle, interpolateColor } from 'react-native-reanimated';
 
 
-const CustomBackground: FC<BottomSheetBackgroundProps> = ({
-  style,
-  animatedIndex,
-}) => {
-  //#region styles
+const CustomBackground: FC<BottomSheetBackgroundProps> = (props) => {
+  const style = props.style
+  const animatedIndex = props.animatedIndex
   const containerAnimatedStyle = useAnimatedStyle(() => ({
     // @ts-ignore
     backgroundColor: interpolateColor(

@@ -5,7 +5,10 @@ import useLanguageSelect from "../hooks/useFindLanguage"
 
 const Store = () => {
 
-  const { data } = useLanguageSelect() 
+  const { data } = useLanguageSelect()
+
+
+
   return <BaseLayout>
     {data.language && <WebView source={{
       uri: `http://114.67.231.163:8081/#/me/shop?have=0&language=${data.language}`

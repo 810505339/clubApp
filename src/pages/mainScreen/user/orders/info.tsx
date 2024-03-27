@@ -10,7 +10,7 @@ import { useRequest } from 'ahooks';
 import { discounts } from '@api/coupon';
 import { ORDERSATUS } from './type';
 import Dialog from '@components/dialog';
-import { cancelOrder } from '@api/order';
+import { cancelOrder, tempPay } from '@api/order';
 import { useImmer } from 'use-immer';
 import Toast from 'react-native-toast-message';
 import { cssInterop } from 'nativewind'
@@ -114,9 +114,9 @@ const OrdersInfo = () => {
       return <View className={`${className} mt-2 h-14`}>
         <Divider className="absolute top-0 left-0 right-0" />
         {orderStatus === undefined && <Button className="bg-[#EE2737FF]" textColor="#0C0C0CFF" onPress={() => submit(route.params?.couponId)}>提交订单</Button>}
-        {orderStatus != undefined && (<>
+        {orderStatus != undefined && orderId != undefined && (<>
           <Button mode={'elevated'} textColor="#ffffff" onPress={() => setAllData(draft => { draft.visible = true; })}>取消订单</Button>
-          <Button mode={'elevated'} className="bg-[#EE2737FF]" textColor="#0C0C0CFF">继续支付</Button>
+          <Button mode={'elevated'} className="bg-[#EE2737FF]" textColor="#0C0C0CFF" onPress={() => tempPay(orderId)}  >继续支付</Button>
         </>)}
       </View>;
     }
