@@ -10,7 +10,7 @@ import { useRequest } from 'ahooks';
 import { discounts } from '@api/coupon';
 import { ORDERSATUS } from './type';
 import Dialog from '@components/dialog';
-import { cancelOrder } from '@api/order';
+import { cancelOrder, tempPay } from '@api/order';
 import { useImmer } from 'use-immer';
 import Toast from 'react-native-toast-message';
 import { cssInterop } from 'nativewind'
@@ -116,7 +116,7 @@ const OrdersInfo = () => {
         {orderStatus === undefined && <Button className="bg-[#EE2737FF]" textColor="#0C0C0CFF" onPress={() => submit(route.params?.couponId)}>提交订单</Button>}
         {orderStatus != undefined && (<>
           <Button mode={'elevated'} textColor="#ffffff" onPress={() => setAllData(draft => { draft.visible = true; })}>取消订单</Button>
-          <Button mode={'elevated'} className="bg-[#EE2737FF]" textColor="#0C0C0CFF">继续支付</Button>
+          <Button mode={'elevated'} className="bg-[#EE2737FF]" textColor="#0C0C0CFF" onPress={() => tempPay('orderId')}  >继续支付</Button>
         </>)}
       </View>;
     }
