@@ -18,7 +18,7 @@ const App = () => {
 
   useEffect(() => {
     /* 这是启动页 */
-    SplashScreen.hide();
+    //SplashScreen.hide();
     getFileUrl();
   }, []);
   const colorScheme = useColorScheme();
