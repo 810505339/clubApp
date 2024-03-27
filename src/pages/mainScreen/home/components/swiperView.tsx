@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { ImageSourcePropType } from 'react-native';
 import { Dimensions, LogBox, TouchableOpacity, View } from 'react-native';
 import Animated, {
-  Extrapolate,
+
   interpolate,
   useAnimatedStyle,
   useSharedValue,
@@ -115,7 +115,9 @@ interface ItemProps {
   source: ImageSourcePropType
 }
 
-const CustomItem: React.FC<ItemProps> = ({ pressAnim, source }) => {
+const CustomItem: React.FC<ItemProps> = (props) => {
+  const source = props.source
+  const pressAnim = props.pressAnim;
   const animStyle = useAnimatedStyle(() => {
     const scale = interpolate(pressAnim.value, [0, 1], [1, 0.9]);
     const borderRadius = interpolate(pressAnim.value, [0, 1], [0, 30]);
