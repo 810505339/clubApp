@@ -1,7 +1,10 @@
 import { ReactNode, PropsWithChildren } from 'react';
 import { Image, View } from 'react-native';
 import { Button, Modal, Portal, Text } from 'react-native-paper';
+import { cssInterop } from 'nativewind';
 const headerIcon = require('@assets/imgs/base/modalHeader.png');
+
+
 type IProps = {
   visible: boolean /* 是否显示弹窗 */
   confirm: () => void /* 点击确定按钮 */
@@ -18,12 +21,12 @@ const Dialog = (props: PropsWithChildren<IProps>) => {
   const _cancelText = cancelText ?? '取消';
   return <Portal>
     <Modal visible={visible} dismissable={false} >
-      <View className="w-[285]  bg-[#222222FF] items-center m-auto rounded-2xl relative ">
+      <View className="w-[285]  bg-[#222222FF] items-center  ml-auto mr-auto rounded-2xl relative ">
         <Image source={headerIcon} resizeMode="contain" className="w-[285] h-[60] absolute -top-2 left-0 right-0" />
         <View>
           {_title}
         </View>
-        <View className="m-auto py-8 px-5">
+        <View className="ml-auto mr-auto py-8 px-5">
           {children}
         </View>
         <View className="flex-row justify-around items-center  w-full px-5 pb-5 ">

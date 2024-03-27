@@ -273,7 +273,7 @@ const Booths = () => {
     </View>
     <Portal>
       <Modal visible={data.visible} onDismiss={onDismiss}>
-        <View className="w-[285]  bg-[#222222FF] items-center m-auto rounded-2xl relative ">
+        <View className="w-[285]  bg-[#222222FF] items-center ml-auto mr-auto  rounded-2xl relative ">
           <Image source={headerIcon} resizeMode="contain" className="w-[285] h-[60] absolute -top-2 left-0 right-0" />
           <View>
             <Text className="text-lg font-bold text-white  text-center pt-2">酒局提示</Text>

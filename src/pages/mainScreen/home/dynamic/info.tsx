@@ -205,7 +205,7 @@ const DynamicInfo = () => {
 
     <Portal>
       <Modal visible={info.visible} onDismiss={hideModal}>
-        <View className="w-[285] h-72 bg-[#1E1E1EFF] items-center m-auto rounded-2xl ">
+        <View className="w-[285] h-72 bg-[#1E1E1EFF] items-center ml-auto mr-auto  rounded-2xl ">
           <ImageBackground source={modalBg} resizeMode="contain" className="absolute -left-1 -right-1 h-[160] top-0" />
           <Image source={modalHeader} resizeMode="contain" className="absolute w-[335] right-0 -top-20" />
           <View className="m-auto w-40">
